@@ -1,0 +1,31 @@
+
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: "jdbc:postgresql://us-east-1.ed9f8a24-b4af-4e4b-baf5-2dbd02c8676a.aws.yugabyte.cloud/yugabyte?ssl=true&sslmode=verify-ca&sslfactory=org.postgresql.ssl.SingleCertValidatingFactory&sslfactoryarg=classpath:certs/root-ca3.crt"
+    username: yugabytedb
+    password: Yugabytedb
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 30000
+      data-source-properties:
+        loginTimeout: 30
+        connectTimeout: 15000
+        socketTimeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org.postgresql: INFO
+    com.zaxxer.hikari: INFO

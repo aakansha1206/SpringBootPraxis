@@ -1,0 +1,43 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: catalog
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/products/**
+        - id: inventory
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/inventory/**
+        - id: orders
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/orders/**
+
+      globalcors:
+        corsConfigurations: 
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+common:
+  observability:
+    exec-time:
+      enabled:true
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSSS} [%thread] %-5level %logger{36} - [%X{correlationId}] %msg%n"
+

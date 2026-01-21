@@ -1,0 +1,41 @@
+server:
+  port: 8083 
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:h2:mem:orderdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:  
+  jpa:
+    hibernate: 
+      ddl-auto: update
+      open-in-view: false 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info
+           
+  logging:
+    level:
+      org.springdoc: DEBUG
+      org.springframework.web: INFO
+
+services:
+    catalog:
+       base-url: "http://localhost:8081"
+    inventory:
+       base-url: "http://localhost:8082"   
+common:
+  observability:
+    exec-time:
+      enabled:true 
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSSS} [%thread] %-5level %logger{36} - [%X{correlationId}] %msg%n"

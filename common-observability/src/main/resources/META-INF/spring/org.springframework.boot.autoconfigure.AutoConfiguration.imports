@@ -1,0 +1,3 @@
+com.ambermount.common_observability.config.ObservabilityAutoConfiguration
+com.ambermount.common_observability.config.CorrelationIdAutoConfiguration
+com.ambermount.common_observability.config.CorrelationIdRestClientAutoConfiguration
